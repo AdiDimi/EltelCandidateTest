@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+//using System.Linq;
+//using System.Text;
+//using System.Threading.Tasks;
 using System.Windows.Forms;
 using CandidateTest.Controllers;
 using CandidateTest.Models;
@@ -12,15 +12,20 @@ namespace CandidateTest.Views
     public class clsShapesContainer
     {
         Panel pnlDrawingCanvas;
+        GroupBox grpShapesCheckBoxPnl; 
+        
         public static Form frmMainForm;
         List<clsShape> shpAllShapes;
+
         System.Windows.Forms.Timer tmrRefreshMovmentClock = new System.Windows.Forms.Timer();
 
         public clsShapesContainer(Form frmInitForm)
         {
             clsShapesContainer.frmMainForm = frmInitForm;
-            InitAllShapes();
+
             InitializeComponent();
+            InitAllShapes();
+            
             InitTimer();
         }
 
@@ -30,7 +35,7 @@ namespace CandidateTest.Views
             tmrRefreshMovmentClock.Tick += new EventHandler(RefreshMovement);
 
             // Sets the timer interval to 1 second.
-            tmrRefreshMovmentClock.Interval = 500;
+            tmrRefreshMovmentClock.Interval = 1000;
             tmrRefreshMovmentClock.Start();
         }
 
@@ -46,7 +51,14 @@ namespace CandidateTest.Views
 
             foreach (strctShapeData objShapeData in hndlr.lstAllShapes)
             {
-                shpAllShapes.Add(GetFuctoryShapeObject(objShapeData));
+                clsShape shpCurrObj = GetFuctoryShapeObject(objShapeData);
+                CheckBox chkCheckToShapeObj = CreateCheckBoxToShape(shpAllShapes.Count);
+
+                chkCheckToShapeObj.CheckedChanged += new System.EventHandler(shpCurrObj.chkShape__CheckedChanged);
+                chkCheckToShapeObj.Text = "eID" + objShapeData.entity_ID.ToString() + "_" +   objShapeData.name;
+
+                grpShapesCheckBoxPnl.Controls.Add(chkCheckToShapeObj);
+                shpAllShapes.Add(shpCurrObj);
             }
         }
 
@@ -82,9 +94,46 @@ namespace CandidateTest.Views
             pnlDrawingCanvas.Size = new System.Drawing.Size(500, 500);
             pnlDrawingCanvas.TabIndex = 0;
             pnlDrawingCanvas.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlDrawingCanvas_Paint);
+
+            grpShapesCheckBoxPnl = new System.Windows.Forms.GroupBox();
+           
+            grpShapesCheckBoxPnl.SuspendLayout();
+            frmMainForm.SuspendLayout();
+
+            // 
+            // grpShapesCheckBoxPnl
+            // 
+            grpShapesCheckBoxPnl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            //this.grpShapesCheckBoxPnl.Controls.Add(this.chkShape_);
+            grpShapesCheckBoxPnl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            grpShapesCheckBoxPnl.Location = new System.Drawing.Point(49, 29);
+            grpShapesCheckBoxPnl.Name = "grpShapesCheckBoxPnl";
+            grpShapesCheckBoxPnl.Size = new System.Drawing.Size(107, 349);
+            grpShapesCheckBoxPnl.TabIndex = 0;
+            grpShapesCheckBoxPnl.TabStop = false;
+
+            frmMainForm.Controls.Add(grpShapesCheckBoxPnl);
             frmMainForm.Controls.Add(pnlDrawingCanvas);
             frmMainForm.ResumeLayout(false);
 
+        }
+
+        CheckBox CreateCheckBoxToShape(int nCurrShapeIndex)
+        {
+           CheckBox chkShape = new System.Windows.Forms.CheckBox();
+
+            chkShape.AutoSize = true;
+            chkShape.Location = new System.Drawing.Point(14, 23 + (nCurrShapeIndex * 25));
+            chkShape.Name = "chkShape_" + nCurrShapeIndex.ToString();
+            chkShape.Size = new System.Drawing.Size(80, 17);
+            chkShape.TabIndex = nCurrShapeIndex;
+            chkShape.Checked = true;
+           // chkShape.Text = "checkBox1";
+            chkShape.UseVisualStyleBackColor = true;
+         //   chkShape.CheckedChanged += new System.EventHandler(this.chkShape__CheckedChanged);
+
+
+            return chkShape;
         }
 
         private void pnlDrawingCanvas_Paint(object sender, PaintEventArgs e)

@@ -25,6 +25,9 @@ namespace WindowsFormsApp6
 
         }
 
-    
+        private void chkShape__CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
