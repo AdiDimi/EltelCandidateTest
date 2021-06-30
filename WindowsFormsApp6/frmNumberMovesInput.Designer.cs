@@ -45,9 +45,10 @@
             // 
             // txtNumberOfMoves
             // 
-            this.txtNumberOfMoves.Location = new System.Drawing.Point(221, 22);
+            this.txtNumberOfMoves.Location = new System.Drawing.Point(222, 22);
+            this.txtNumberOfMoves.MaxLength = 2;
             this.txtNumberOfMoves.Name = "txtNumberOfMoves";
-            this.txtNumberOfMoves.Size = new System.Drawing.Size(66, 20);
+            this.txtNumberOfMoves.Size = new System.Drawing.Size(39, 20);
             this.txtNumberOfMoves.TabIndex = 1;
             this.txtNumberOfMoves.TextChanged += new System.EventHandler(this.txtNumberOfMoves_TextChanged);
             // 

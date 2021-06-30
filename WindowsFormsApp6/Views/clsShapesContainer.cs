@@ -36,8 +36,8 @@ namespace CandidateTest.Views
             tmrRefreshMovmentClock.Tick += new EventHandler(RefreshMovement);
 
             // Sets the timer interval to 1 second.
-            tmrRefreshMovmentClock.Interval = 500;
-            tmrRefreshMovmentClock.Start();
+            tmrRefreshMovmentClock.Interval = 1000;
+            
         }
 
         void RefreshMovement(Object myObject, EventArgs myEventArgs)
@@ -54,14 +54,21 @@ namespace CandidateTest.Views
 
             foreach (strctShapeData objShapeData in clsShapesDataHandler.lstAllShapes)
             {
-                clsShape shpCurrObj = GetFuctoryShapeObject(objShapeData);
-                CheckBox chkCheckToShapeObj = CreateCheckBoxToShape(shpAllShapes.Count);
+                if (shpAllShapes.Count < 10)
+                {
+                    clsShape shpCurrObj = GetFuctoryShapeObject(objShapeData);
+                    CheckBox chkCheckToShapeObj = CreateCheckBoxToShape(shpAllShapes.Count);
 
-                chkCheckToShapeObj.CheckedChanged += new System.EventHandler(shpCurrObj.chkShape__CheckedChanged);
-                chkCheckToShapeObj.Text = "eID" + objShapeData.entity_ID.ToString() + "_" +   objShapeData.name;
+                    chkCheckToShapeObj.CheckedChanged += new System.EventHandler(shpCurrObj.chkShape__CheckedChanged);
+                    chkCheckToShapeObj.Text = "eID" + objShapeData.entity_ID.ToString() + "_" + objShapeData.name;
 
-                grpShapesCheckBoxPnl.Controls.Add(chkCheckToShapeObj);
-                shpAllShapes.Add(shpCurrObj);
+                    grpShapesCheckBoxPnl.Controls.Add(chkCheckToShapeObj);
+                    shpAllShapes.Add(shpCurrObj);
+                }
+                else
+                {
+                    throw new System.ArgumentException("Json illegal shapes amount in file, only 10 shapes are alowed");
+                }
             }
         }
 
@@ -157,9 +164,10 @@ namespace CandidateTest.Views
 
         public void StratOrStopMovingAllShapes(bool bStartStopFlag)
         {
+            tmrRefreshMovmentClock.Start();
             foreach (clsShape shpCurrShape in shpAllShapes)
             {
-
+                
                 shpCurrShape.StartStopTimer(bStartStopFlag);
             }
         }

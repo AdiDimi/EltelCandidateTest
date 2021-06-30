@@ -11,7 +11,8 @@ namespace CandidateTest.Controllers
         {
             if (bIsOnStage)
             {
-                Rectangle recBounds = new Rectangle(new Point(shpShapeData.X * SCALE_FACTOR, shpShapeData.Y * SCALE_FACTOR), new Size(50, 50));
+                Rectangle recBounds = new Rectangle(new Point(shpShapeData.X * SCALE_FACTOR, shpShapeData.Y * SCALE_FACTOR), dicSizes[shpShapeData.size]);
+
                 Point pntTop = new Point(recBounds.X + recBounds.Width / 2, recBounds.Y);
                 Point pntRight = new Point(recBounds.X + recBounds.Width, recBounds.Y + recBounds.Height);
                 Point pntLeft = new Point(recBounds.X, recBounds.Y + recBounds.Height);
