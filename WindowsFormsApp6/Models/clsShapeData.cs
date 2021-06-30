@@ -1,12 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-<<<<<<< Updated upstream
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-=======
 
->>>>>>> Stashed changes
 
 namespace CandidateTest.Models
 {

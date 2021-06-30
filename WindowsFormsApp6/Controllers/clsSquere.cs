@@ -18,7 +18,7 @@ namespace CandidateTest.Controllers
             if (bIsOnStage)
             {
                 //gGraphicsHndlr.DrawRectangle(new Pen(Brushes.Yellow, 2), new Rectangle(new Point(shpShapeData.X, shpShapeData.Y), new Size(50, 50)));
-                gGraphicsHndlr.FillRectangle(dicColors[shpShapeData.color], new Rectangle(new Point(shpShapeData.X, shpShapeData.Y), new Size(50, 50)));
+                gGraphicsHndlr.FillRectangle(dicColors[shpShapeData.color], new Rectangle(new Point(shpShapeData.X * SCALE_FACTOR, shpShapeData.Y * SCALE_FACTOR), new Size(50, 50)));
 
             }
         }

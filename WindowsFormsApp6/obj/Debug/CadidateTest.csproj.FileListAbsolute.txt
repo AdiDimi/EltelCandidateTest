@@ -11,3 +11,4 @@ C:\Users\USER\source\repos\CandidateTest\WindowsFormsApp6\obj\Debug\CadidateTest
 C:\Users\USER\source\repos\CandidateTest\WindowsFormsApp6\obj\Debug\CadidateTest.csproj.CopyComplete
 C:\Users\USER\source\repos\CandidateTest\WindowsFormsApp6\obj\Debug\WindowsFormsApp6.exe
 C:\Users\USER\source\repos\CandidateTest\WindowsFormsApp6\obj\Debug\WindowsFormsApp6.pdb
+C:\Users\USER\source\repos\CandidateTest\WindowsFormsApp6\obj\Debug\WindowsFormsApp6.frmNumberMovesInput.resources

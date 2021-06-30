@@ -14,6 +14,9 @@ namespace WindowsFormsApp6
 {
     public partial class frmShapesMovement : Form
     {
+        clsShapesContainer contnr;
+        
+
         public frmShapesMovement()
         {
             InitializeComponent();
@@ -21,10 +24,27 @@ namespace WindowsFormsApp6
 
         private void frmShapesMovement_Load(object sender, EventArgs e)
         {
-            clsShapesContainer contnr = new clsShapesContainer(this);
+             contnr = new clsShapesContainer(this);
 
         }
 
-    
+
+        private void btnStop_Click(object sender, EventArgs e)
+        {
+            contnr.StratOrStopMovingAllShapes(false);
+            contnr.SaveToHistoryToCsv();
+        }
+
+        private void btnStart_Click(object sender, EventArgs e)
+        {
+            frmNumberMovesInput frmNumberMovesInput = new frmNumberMovesInput();
+            frmNumberMovesInput.ShowDialog();
+
+            
+            contnr.StratOrStopMovingAllShapes(true);
+
+
+        }
     }
+
 }

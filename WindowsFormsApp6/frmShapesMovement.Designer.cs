@@ -28,52 +28,49 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.grpShapesCheckBoxPnl = new System.Windows.Forms.GroupBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.grpShapesCheckBoxPnl.SuspendLayout();
+            this.btnStop = new System.Windows.Forms.Button();
+            this.btnStart = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // grpShapesCheckBoxPnl
+            // btnStop
             // 
-            this.grpShapesCheckBoxPnl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.grpShapesCheckBoxPnl.Controls.Add(this.checkBox1);
-            this.grpShapesCheckBoxPnl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.grpShapesCheckBoxPnl.Location = new System.Drawing.Point(49, 29);
-            this.grpShapesCheckBoxPnl.Name = "grpShapesCheckBoxPnl";
-            this.grpShapesCheckBoxPnl.Size = new System.Drawing.Size(107, 349);
-            this.grpShapesCheckBoxPnl.TabIndex = 0;
-            this.grpShapesCheckBoxPnl.TabStop = false;
+            this.btnStop.Location = new System.Drawing.Point(205, 472);
+            this.btnStop.Name = "btnStop";
+            this.btnStop.Size = new System.Drawing.Size(75, 23);
+            this.btnStop.TabIndex = 0;
+            this.btnStop.Text = "stop";
+            this.btnStop.UseVisualStyleBackColor = true;
+            this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
             // 
-            // checkBox1
+            // btnStart
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(14, 23);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(80, 17);
-            this.checkBox1.TabIndex = 0;
-            this.checkBox1.Text = "checkBox1";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.btnStart.Location = new System.Drawing.Point(205, 433);
+            this.btnStart.Name = "btnStart";
+            this.btnStart.Size = new System.Drawing.Size(75, 23);
+            this.btnStart.TabIndex = 1;
+            this.btnStart.Text = "start";
+            this.btnStart.UseVisualStyleBackColor = true;
+            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
             // frmShapesMovement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(819, 572);
-            this.Controls.Add(this.grpShapesCheckBoxPnl);
+            this.Controls.Add(this.btnStart);
+            this.Controls.Add(this.btnStop);
             this.DoubleBuffered = true;
             this.Name = "frmShapesMovement";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.frmShapesMovement_Load);
-            this.grpShapesCheckBoxPnl.ResumeLayout(false);
-            this.grpShapesCheckBoxPnl.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.GroupBox grpShapesCheckBoxPnl;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.Button btnStop;
+        private System.Windows.Forms.Button btnStart;
     }
 }
 

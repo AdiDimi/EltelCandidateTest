@@ -16,6 +16,12 @@ namespace CandidateTest.Controllers
         protected bool bIsOnStage = true;
         clsShapeHistoryQueue queShapeMoves;
 
+        int nAddNextStepsToY;
+        int nAddNextStepsToX;
+        int nCurrHeading = 0;
+
+        protected const int SCALE_FACTOR = 5;
+
        protected Dictionary<string, Brush> dicColors; // = new Dictionary<string, Pen>(){;
 
 
@@ -25,22 +31,34 @@ namespace CandidateTest.Controllers
    
             shpShapeData = shpCurrShapeData;
             InitAndCheckColor();
-
+            InitMoveTimer();
             queShapeMoves = new clsShapeHistoryQueue(shpShapeData.entity_ID, shpShapeData.name);
             queShapeMoves.InsertMove(shpShapeData.X, shpShapeData.Y);
-            InitTimer();
+            
 
         }
 
 
-        void InitTimer()
+        void InitMoveTimer()
         {
     
             tmrMovmentClock.Tick += new EventHandler(Move);
 
             // Sets the timer interval to 1 second.
             tmrMovmentClock.Interval = 1000;
-            tmrMovmentClock.Start();
+           
+        }
+
+        public void StartStopTimer(bool bStartStopFlag)
+        {
+            if (bStartStopFlag)
+            {
+                tmrMovmentClock.Start();
+            }
+            else
+            {
+                tmrMovmentClock.Stop();
+            }
         }
 
         void InitAndCheckColor()
@@ -61,12 +79,40 @@ namespace CandidateTest.Controllers
 
         public abstract void Draw(Graphics gGraphicsHndlr);
       
+        void CalcNextStepsToShape()
+        {
+            List<int> lstDirection; // = new List<int> { -1, 0, 1 };
+            Random rndCurrHeadin = new Random();
+            int nDirIndex;
 
+            if (nCurrHeading == 0)
+            {
+                lstDirection = new List<int> { 45, 135, 225, 315 };
+                nDirIndex = rndCurrHeadin.Next(0, 3);
+                nCurrHeading = lstDirection[nDirIndex];
+            }
+            else
+            {
+                lstDirection = new List<int> { -1, 0, 1 };
+                nDirIndex = rndCurrHeadin.Next(0, 2);
+                nCurrHeading += 90 * lstDirection[nDirIndex];
+
+                if (nCurrHeading > 360)
+                    nCurrHeading = nCurrHeading - 360;
+                else if (nCurrHeading < 0)
+                    nCurrHeading += 360;
+            }
+            nAddNextStepsToY = Convert.ToInt32(5 * Math.Sin(nCurrHeading));
+            nAddNextStepsToX = Convert.ToInt32(5 * Math.Cos(nCurrHeading));
+            //45,135,225,315
+        }
 
         void Move(Object myObject, EventArgs myEventArgs)
         {
-            shpShapeData.X += 5;
-            shpShapeData.Y += 3;
+            CalcNextStepsToShape();
+
+            shpShapeData.X += nAddNextStepsToX;
+            shpShapeData.Y += nAddNextStepsToY;
 
             queShapeMoves.InsertMove(shpShapeData.X, shpShapeData.Y); 
            // clsShapesContainer.pnlDrawingCanvas.Invalidate();
@@ -77,6 +123,11 @@ namespace CandidateTest.Controllers
             bIsOnStage = !bIsOnStage;
 
 
+        }
+
+        public List<stctShapeMoveInfo> GetHistoryQueue()
+        {
+            return queShapeMoves.GetHistory();
         }
 
         bool CheckIfValidMove()
