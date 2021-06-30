@@ -25,20 +25,24 @@
     "size": "small",
     "X": "19",
     "Y": "31"
-  }, {
-	"entity_ID": "4",
-	"name": "Barbara",
-	"color": "red",
-	"shape": "triangle",
-	"size": "large",
-	"X": "5",
-	"Y": "2"
-}, {
-	"entity_ID": "5",
-	"name": "Iyana",
-	"color": "blue",
-	"shape": "circle",
-	"size": "small",
-	"X": "76",
-	"Y": "8"
-}]
+  },
+  {
+    "entity_ID": "4",
+    "name": "Barbara",
+    "color": "green",
+    "shape": "triangle",
+    "size": "large",
+    "X": "5",
+    "Y": "2"
+  },
+  {
+    "entity_ID": "5",
+    "name": "Iyana",
+    "color": "blue",
+    "shape": "circle",
+    "size": "small",
+    "X": "76",
+    "Y": "8"
+  }
+  
+]

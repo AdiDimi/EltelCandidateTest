@@ -1,5 +1,5 @@
-﻿//using System;
-//using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 //using System.Linq;
 //using System.Text;
 //using System.Threading.Tasks;
@@ -13,11 +13,15 @@ namespace CandidateTest.Controllers
     {
         public clsSquere(strctShapeData shpCurrCirculeData) : base(shpCurrCirculeData) { }
 
+ 
+
         public override void Draw(Graphics gGraphicsHndlr)
         {
             if (bIsOnStage)
             {
-                gGraphicsHndlr.DrawRectangle(new Pen(Brushes.Yellow, 2), new Rectangle(new Point(shpShapeData.X, shpShapeData.Y), new Size(50, 50)));
+                Point pntCurrPos = new Point(shpShapeData.X * SCALE_FACTOR, shpShapeData.Y * SCALE_FACTOR);
+                gGraphicsHndlr.FillRectangle(dicColors[shpShapeData.color], new Rectangle(new Point(shpShapeData.X * SCALE_FACTOR, shpShapeData.Y * SCALE_FACTOR), dicSizes[shpShapeData.size]));
+
             }
         }
     }

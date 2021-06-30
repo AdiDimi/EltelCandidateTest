@@ -1,6 +1,7 @@
 ﻿using System;
+
 using System.Collections.Generic;
-//using System.Linq;
+using System.Linq;
 //using System.Text;
 //using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -36,7 +37,7 @@ namespace CandidateTest.Views
 
             // Sets the timer interval to 1 second.
             tmrRefreshMovmentClock.Interval = 1000;
-            tmrRefreshMovmentClock.Start();
+            
         }
 
         void RefreshMovement(Object myObject, EventArgs myEventArgs)
@@ -49,16 +50,25 @@ namespace CandidateTest.Views
             clsShapesDataHandler hndlr = new clsShapesDataHandler();
             shpAllShapes = new List<clsShape>();
 
-            foreach (strctShapeData objShapeData in hndlr.lstAllShapes)
+            hndlr.LoadJson();
+
+            foreach (strctShapeData objShapeData in clsShapesDataHandler.lstAllShapes)
             {
-                clsShape shpCurrObj = GetFuctoryShapeObject(objShapeData);
-                CheckBox chkCheckToShapeObj = CreateCheckBoxToShape(shpAllShapes.Count);
+                if (shpAllShapes.Count < 10)
+                {
+                    clsShape shpCurrObj = GetFuctoryShapeObject(objShapeData);
+                    CheckBox chkCheckToShapeObj = CreateCheckBoxToShape(shpAllShapes.Count);
 
-                chkCheckToShapeObj.CheckedChanged += new System.EventHandler(shpCurrObj.chkShape__CheckedChanged);
-                chkCheckToShapeObj.Text = "eID" + objShapeData.entity_ID.ToString() + "_" +   objShapeData.name;
+                    chkCheckToShapeObj.CheckedChanged += new System.EventHandler(shpCurrObj.chkShape__CheckedChanged);
+                    chkCheckToShapeObj.Text = "eID" + objShapeData.entity_ID.ToString() + "_" + objShapeData.name;
 
-                grpShapesCheckBoxPnl.Controls.Add(chkCheckToShapeObj);
-                shpAllShapes.Add(shpCurrObj);
+                    grpShapesCheckBoxPnl.Controls.Add(chkCheckToShapeObj);
+                    shpAllShapes.Add(shpCurrObj);
+                }
+                else
+                {
+                    throw new System.ArgumentException("Json illegal shapes amount in file, only 10 shapes are alowed");
+                }
             }
         }
 
@@ -77,6 +87,8 @@ namespace CandidateTest.Views
                 case "triangle":
                     shpTmpShape = new clsTriangle(currShapeData);
                     break;
+                default:
+                    throw new System.ArgumentException($"Json illegal shape name format : '{currShapeData.shape}' in '{currShapeData.name}' shape");
             }
 
             return shpTmpShape;
@@ -136,14 +148,39 @@ namespace CandidateTest.Views
             return chkShape;
         }
 
+        public void SaveToHistoryToCsv()
+        {
+            List<stctShapeMoveInfo>  shpAllShapesHistory = new List<stctShapeMoveInfo>();
+            clsShapesDataHandler hndlr = new clsShapesDataHandler();
+
+            foreach (clsShape shpCurrShape in shpAllShapes)
+            {
+                shpAllShapesHistory.AddRange(shpCurrShape.GetHistoryQueue());
+               // shpAllShapesHistory.Concat(shpCurrShape.GetHistoryQueue());
+            }
+
+            hndlr.SaveHistoryToCsv(shpAllShapesHistory);
+        }
+
+        public void StratOrStopMovingAllShapes(bool bStartStopFlag)
+        {
+            tmrRefreshMovmentClock.Start();
+            foreach (clsShape shpCurrShape in shpAllShapes)
+            {
+                
+                shpCurrShape.StartStopTimer(bStartStopFlag);
+            }
+        }
+
+
         private void pnlDrawingCanvas_Paint(object sender, PaintEventArgs e)
         {
                       
 
-            foreach (clsShape s in shpAllShapes)
+            foreach (clsShape shpCurrShape in shpAllShapes)
             {
-                if((s!=null))
-                     s.Draw(e.Graphics);
+                if((shpCurrShape != null))
+                    shpCurrShape.Draw(e.Graphics);
             }
             //frmMainForm.ResumeLayout();
             

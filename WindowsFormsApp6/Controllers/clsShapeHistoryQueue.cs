@@ -8,7 +8,7 @@ namespace CandidateTest.Controllers
 {
     public class clsShapeHistoryQueue
     {
-        static int nMaxQueueLen = 6;
+        public static int nMaxQueueLen = 1;
         List<stctShapeMoveInfo> quShapesQueue;
         int nEntityID;
         string strEntityName;
@@ -41,6 +41,11 @@ namespace CandidateTest.Controllers
                 quShapesQueue.RemoveAt(0);
             }
         }
+
+        public List<stctShapeMoveInfo> GetHistory()
+        {
+            return quShapesQueue;
+          }
     }
 
     public struct stctShapeMoveInfo
