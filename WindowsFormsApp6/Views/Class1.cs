@@ -65,6 +65,8 @@ namespace CandidateTest.Views
                 case "triangle":
                     shpTmpShape = new clsTriangle(currShapeData);
                     break;
+                default:
+                    throw new System.ArgumentException($"Json illegal shape name format : '{currShapeData.shape}' in '{currShapeData.name}' shape");
             }
 
             return shpTmpShape;

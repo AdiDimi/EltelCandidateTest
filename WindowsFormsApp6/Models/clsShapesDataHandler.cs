@@ -15,18 +15,29 @@ namespace CandidateTest.Models
 
         public clsShapesDataHandler()
         {
-           
+
             LoadJson();
         }
 
         public void LoadJson()
         {
-            
-            using (StreamReader r = new StreamReader(strJsonpath))
+
+            try
             {
-                string json = r.ReadToEnd();
-                lstAllShapes  = JsonConvert.DeserializeObject<IEnumerable<strctShapeData>>(json);
+                using (StreamReader r = new StreamReader(strJsonpath))
+                {
+                    string json = r.ReadToEnd();
+
+                    lstAllShapes = JsonConvert.DeserializeObject<IEnumerable<strctShapeData>>(json);
+
+                }
+        
+            }
+            catch (Exception ex)
+            {
+                throw new System.ArgumentException($"Error on loading Json file : '{ex.Message}'");
             }
         }
+        
     }
 }
