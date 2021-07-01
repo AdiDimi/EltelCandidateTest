@@ -1,5 +1,7 @@
-﻿using CandidateTest.Models;
+﻿using System;
 using System.Drawing;
+using CandidateTest.Models;
+using System.Collections.Generic;
 
 namespace CandidateTest.Controllers
 {
@@ -7,10 +9,15 @@ namespace CandidateTest.Controllers
     {
         public clsTriangle(strctShapeData shpCurrCirculeData) : base(shpCurrCirculeData) { }
 
+
+    
+
         public override void Draw(Graphics gGraphicsHndlr)
         {
             if (bIsOnStage)
             {
+                CalcNextStepsToShape();
+
                 Rectangle recBounds = new Rectangle(new Point(shpShapeData.X * SCALE_FACTOR, shpShapeData.Y * SCALE_FACTOR), dicSizes[shpShapeData.size]);
 
                 Point pntTop = new Point(recBounds.X + recBounds.Width / 2, recBounds.Y);

@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using CandidateTest.Models;
 using System.Drawing;
-
+using System.Threading.Tasks;
 
 namespace CandidateTest.Controllers
 {
 
     /// <summary>
-    /// Public abstract class clsShape - the base class of all shapes implements shared methods and properties
-    /// Ddeclares the abstruct draw function whitch must be implemnted on the driven classes
+    /// Public abstract class clsShape - the base class of all shapes, implements shared methods and properties
+    /// Declares the abstruct draw function whitch must be implemnted on the driven classes
     /// </summary>
     public abstract class clsShape
     {
@@ -23,7 +23,7 @@ namespace CandidateTest.Controllers
         protected bool bIsOnStage = true;
 
         // History moves variable
-        clsShapeHistoryQueue queShapeMoves;
+        protected clsShapeHistoryQueue queShapeMoves;
 
         // Variables use for next step culc
         protected int nAddNextStepsToY;
@@ -31,6 +31,7 @@ namespace CandidateTest.Controllers
         protected int nCurrHeading = 0;
 
         protected const int SCALE_FACTOR = 5;
+        //protected Random rndCurrHeadin; // = new Random();
 
         // Const shapes sizes
         protected const int SMALL_SHAPE_SIZE = 30;
@@ -71,7 +72,7 @@ namespace CandidateTest.Controllers
             tmrMovmentClock.Tick += new EventHandler(Move);
 
             // Sets the timer interval to 5 second.
-            tmrMovmentClock.Interval = 5000;
+            tmrMovmentClock.Interval = 1000;
            
         }
 
@@ -128,7 +129,7 @@ namespace CandidateTest.Controllers
 
         public abstract void Draw(Graphics gGraphicsHndlr);
 
-        protected  void CalcNextStepsToShape()
+        protected void CalcNextStepsToShape()
         {
             List<int> lstDirection; // = new List<int> { -1, 0, 1 };
             Random rndCurrHeadin = new Random();
@@ -142,10 +143,10 @@ namespace CandidateTest.Controllers
             }
             else
             {
-               
-                lstDirection = new List<int> { -1, 0, 1, -1, 0,1 };
+
+                lstDirection = new List<int> { -1, 0, 1, -1, 0, 1 };
                 nDirIndex = rndCurrHeadin.Next(0, 5);
-                nCurrHeading = nCurrHeading + ( 90 * lstDirection[nDirIndex]);
+                nCurrHeading = nCurrHeading + (90 * lstDirection[nDirIndex]);
 
                 if (nCurrHeading > 360)
                     nCurrHeading = nCurrHeading - 360;
@@ -155,23 +156,23 @@ namespace CandidateTest.Controllers
 
             nAddNextStepsToY = Convert.ToInt32(5 * Math.Sin(nCurrHeading));
             nAddNextStepsToX = Convert.ToInt32(5 * Math.Cos(nCurrHeading));
-            //45,135,225,315
+            ////45,135,225,315
         }
 
-        void Move(Object myObject, EventArgs myEventArgs)
+        protected void Move(Object myObject, EventArgs myEventArgs)
         {
             CalcNextStepsToShape();
 
             shpShapeData.X += nAddNextStepsToX;
             shpShapeData.Y += nAddNextStepsToY;
 
-        
-           
-            queShapeMoves.InsertMove(shpShapeData.X, shpShapeData.Y); 
-           
+
+
+            queShapeMoves.InsertMove(shpShapeData.X, shpShapeData.Y);
+
         }
 
-        public void chkShape__CheckedChanged(object sender, EventArgs e)
+    public void chkShape__CheckedChanged(object sender, EventArgs e)
         {
             bIsOnStage = !bIsOnStage;
 

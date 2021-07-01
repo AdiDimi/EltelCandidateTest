@@ -3,6 +3,7 @@ C:\Users\USER\source\repos\CandidateTest\WindowsFormsApp6\bin\Release\WindowsFor
 C:\Users\USER\source\repos\CandidateTest\WindowsFormsApp6\bin\Release\WindowsFormsApp6.pdb
 C:\Users\USER\source\repos\CandidateTest\WindowsFormsApp6\bin\Release\Newtonsoft.Json.dll
 C:\Users\USER\source\repos\CandidateTest\WindowsFormsApp6\bin\Release\Newtonsoft.Json.xml
+C:\Users\USER\source\repos\CandidateTest\WindowsFormsApp6\obj\Release\WindowsFormsApp6.frmNumberMovesInput.resources
 C:\Users\USER\source\repos\CandidateTest\WindowsFormsApp6\obj\Release\WindowsFormsApp6.frmShapesMovement.resources
 C:\Users\USER\source\repos\CandidateTest\WindowsFormsApp6\obj\Release\WindowsFormsApp6.Properties.Resources.resources
 C:\Users\USER\source\repos\CandidateTest\WindowsFormsApp6\obj\Release\CadidateTest.csproj.GenerateResource.cache
