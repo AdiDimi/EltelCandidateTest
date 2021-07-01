@@ -37,6 +37,8 @@ namespace WindowsFormsApp6
 
         private void btnStart_Click(object sender, EventArgs e)
         {
+            contnr.StratOrStopMovingAllShapes(false);
+
             frmNumberMovesInput frmNumberMovesInput = new frmNumberMovesInput();
             frmNumberMovesInput.ShowDialog();
 

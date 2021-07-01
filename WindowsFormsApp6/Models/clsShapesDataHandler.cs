@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using System.IO;
 using CandidateTest.Controllers;
+using CandidateTest.Shared;
 
 namespace CandidateTest.Models
 {
     public class clsShapesDataHandler
     {
-        string strJsonpath = "..\\..\\Models\\entityData.json";
-        string strCSVpath = "..\\..\\Models\\MovesData.csv";
-
+     
         public static IEnumerable<strctShapeData> lstAllShapes;
 
         public clsShapesDataHandler()
@@ -24,7 +23,7 @@ namespace CandidateTest.Models
 
             try
             {
-                using (StreamReader r = new StreamReader(strJsonpath))
+                using (StreamReader r = new StreamReader(SharedItems.JSON_FILE_NAME))
                 {
                     string json = r.ReadToEnd();
 
@@ -44,7 +43,7 @@ namespace CandidateTest.Models
         {
             try
             {
-                using (StreamWriter r = new StreamWriter(strCSVpath))
+                using (StreamWriter r = new StreamWriter(SharedItems.CSV_FILE_NAME))
                 {
 
                     foreach (stctShapeMoveInfo dataCurrMove in lstAllShapesHistory)

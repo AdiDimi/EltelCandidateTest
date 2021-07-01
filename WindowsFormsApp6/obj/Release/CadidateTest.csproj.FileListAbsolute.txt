@@ -11,3 +11,4 @@ C:\Users\USER\source\repos\CandidateTest\WindowsFormsApp6\obj\Release\CadidateTe
 C:\Users\USER\source\repos\CandidateTest\WindowsFormsApp6\obj\Release\CadidateTest.csproj.CopyComplete
 C:\Users\USER\source\repos\CandidateTest\WindowsFormsApp6\obj\Release\WindowsFormsApp6.exe
 C:\Users\USER\source\repos\CandidateTest\WindowsFormsApp6\obj\Release\WindowsFormsApp6.pdb
+C:\Users\USER\source\repos\CandidateTest\WindowsFormsApp6\obj\Release\CadidateTest.csprojAssemblyReference.cache
