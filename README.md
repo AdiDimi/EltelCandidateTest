@@ -14,4 +14,4 @@ prev location point to the current.
 
 2. For a 3d support we have to add the z variable to the shape object
 and calculation for next steps will have to take in mind the double axis(2 angles),
-shapes on the display will move in smaller steps if they have z grater or less then 0
+shapes on the display will move in smaller steps if they dont move horizontally.
